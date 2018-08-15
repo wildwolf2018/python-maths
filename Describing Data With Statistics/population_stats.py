@@ -3,6 +3,9 @@ Calculates the mean, median, variance and standard deviation
 Plots the graph of population differences 
 '''
 
+import csv
+import matplotlib.pyplot as plt
+
 #Calculates the mean
 def find_mean(data, data_size):
 	total = sum(data)
@@ -41,11 +44,49 @@ def std_deviation(data, data_size):
 	variance = find_variance(data, data_size)
 	return variance ** 0.5
 
+#Drwas the sctter plot
+def draw_graph(x, y):
+	plt.scatter(x, y, color='red')
+	plt.title('Population differences from end of 1951 to end of 2017')
+	plt.xlabel('years')
+	plt.ylabel('difference between successive years')
+	plt.axis(xmin=0.0)
+	plt.grid()
+	plt.show()
+	
+#Shows the statistcs
+def calculate_stats(data):
+	number_of_elements = len(data)
+	diff_mean = find_mean(data, number_of_elements)
+	diff_median = find_median(data, number_of_elements)
+	diff_variance = find_variance(data, number_of_elements)
+	diff_std = std_deviation(data, number_of_elements)
+	print('Mean is {0}\nMedian is {1}\nVariance is {2}\nStandard deviation is {3}'.format(diff_mean, diff_median, diff_variance, diff_std))
+	
+	
 if __name__ == '__main__':
-	population =  [100, 60, 70, 900, 100, 200, 500, 500, 503, 600, 1000, 1200] 
-	print(population)
-	number_of_elements = len(population)
-	population_var = find_variance(population, number_of_elements)
-	population_std = std_deviation(population, number_of_elements)
-	print('Variance is {0}'.format(population_var))
-	print('Standard deviation is {0}'.format(population_std))
+	differences = []
+	x_values = []
+	previous_value = 0
+	current_value = 0
+	diff = 0
+	row_number = 1
+	
+	with open('WWDI-USA_SP_POP_TOTL.csv') as cvs_file:          
+		reader = csv.reader(cvs_file) 
+		next(reader) 
+		second_row  = next(reader) 
+		previous_value = float(second_row[1])
+		for row in reader:                         
+			current_value = float(row[1])
+			diff = abs(current_value - previous_value)
+			differences.append(diff)
+			x_values.append(row_number)
+			row_number += 1
+			previous_value = current_value
+			
+	# Plot
+	differences.reverse()
+	draw_graph(x_values, differences)
+	calculate_stats(differences)
+	

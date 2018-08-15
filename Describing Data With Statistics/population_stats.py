@@ -63,7 +63,6 @@ def calculate_stats(data):
 	diff_std = std_deviation(data, number_of_elements)
 	print('Mean is {0}\nMedian is {1}\nVariance is {2}\nStandard deviation is {3}'.format(diff_mean, diff_median, diff_variance, diff_std))
 	
-	
 if __name__ == '__main__':
 	differences = []
 	x_values = []

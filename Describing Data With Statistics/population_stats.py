@@ -20,12 +20,12 @@ def find_median(data, data_size):
 	#then calculates medain based on the result of test
 	if data_size % 2 == 0:
 		#Position of first number in sorted list bigger than the median
-		first_num_pos = int(number_of_elements / 2)
+		first_num_pos = data_size // 2
 		#Position of first number in sorted list smaller than the median
 		second_num_pos = first_num_pos - 1
 		median = (data[first_num_pos] + data[second_num_pos]) / 2
 	else:
-		median_position = (data_size // 2)
+		median_position = data_size // 2
 		median = data[median_position]
 	return median
 		

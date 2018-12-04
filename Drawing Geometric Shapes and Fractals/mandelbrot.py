@@ -19,12 +19,14 @@ def create_mandelbrot_set(x_numPoints, y_numPoints, max_iteration, canvas):
 	x_dist = 1 / width #Distance between two points along the x-axis
 	height = 200 #Height of the image
 	y_dist = 1 / height #Distance between two points along the y-axis
+	start_x = -2.5 #Minimum x coordinate value
+	start_y = -1.0 #Minimum y coordinate value
 
 	for i in range(y_numPoints):
 	 	for k in range(x_numPoints):
 	 		z1 = 0 + 0j
-	 		real = -2.5 + k * x_dist
-	 		img = -1.0 + i * y_dist
+	 		real = start_x + k * x_dist
+	 		img = start_y + i * y_dist
 	 		c = complex(real, img)
 	 		iteration = 0	
 	 		while abs(z1) < 2 and iteration < max_iteration:
@@ -42,4 +44,7 @@ if __name__ == '__main__':
 
 	#Plots the Mandelbrot set on the x-y axis
 	plt.imshow(image, origin='lower', extent=(-2.5, 1.0, -1.0, 1.0),cmap=cm.Greys_r)
+	plt.title('Mandelbrot Set')
+	plt.xlabel('X')
+	plt.ylabel('Y')
 	plt.show() 

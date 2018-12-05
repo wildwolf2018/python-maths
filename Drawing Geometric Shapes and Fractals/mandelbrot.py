@@ -31,7 +31,7 @@ def create_mandelbrot_set(x_numPoints, y_numPoints, max_iteration, canvas):
 	 		iteration = 0	
 	 		while abs(z1) < 2 and iteration < max_iteration:
 	 			z1 = z1 ** 2 + c
-	 			iteration = iteration + 1
+	 			iteration += 1
  			canvas[i][k] = iteration
 	return canvas
 

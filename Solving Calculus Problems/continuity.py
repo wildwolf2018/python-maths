@@ -7,7 +7,7 @@ is continous at a point.
 Returns True is function is continuous, False otherwise'''
 from sympy import Symbol, sympify, Limit, S
 
-def check_continuity(function, a):
+def check_continuity(function, x, a):
 	is_continuous = False
 	right_limit = Limit(f, x, a).doit()
 	if right_limit != S.Infinity:
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 		x = Symbol(var)
 		a = float(input('Enter the point to check the continuity at: '))
 
-		if check_continuity(f, a) == True:
+		if check_continuity(f, x, a) == True:
 			print('{0} is continuous at {1}'.format(f, a))
 		else:
 			print('{0} is not continuous at {1}'.format(f, a))
